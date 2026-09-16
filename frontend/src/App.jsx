@@ -15,12 +15,12 @@ export default function App() {
   return (
     <div className="mx-auto flex min-h-screen max-w-4xl flex-col gap-6 px-4 py-8 sm:px-8">
       <header className="flex flex-wrap items-baseline justify-between gap-3">
-        <h1 className="text-lg font-medium">
-          Link monitor{" "}
-          <span className="font-normal text-muted">
-            {latest.interface_index != null ? `— interface ${latest.interface_index}` : ""}
-          </span>
-        </h1>
+        <div>
+          <h1 className="text-lg font-medium leading-tight">Link monitor</h1>
+          <p className="text-sm text-muted">
+            Interface {latest.interface_index ?? "—"}
+          </p>
+        </div>
         <StatusBadge connected={connected} />
       </header>
 

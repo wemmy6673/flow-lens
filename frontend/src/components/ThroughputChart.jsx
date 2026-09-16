@@ -16,7 +16,7 @@ export default function ThroughputChart({ samples }) {
   }));
 
   return (
-    <div className="rounded-[10px] border border-graticule bg-panel p-5">
+    <div className="rounded-xl border border-graticule bg-panel p-5">
       <p className="mb-2.5 text-sm text-muted">Last 2 minutes</p>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
@@ -27,13 +27,7 @@ export default function ThroughputChart({ samples }) {
               stroke="#7f8ba1"
               tick={{ fill: "#7f8ba1", fontSize: 12 }}
               tickFormatter={(v) => v.toFixed(1)}
-              label={{
-                value: "Mbps",
-                angle: -90,
-                position: "insideLeft",
-                fill: "#7f8ba1",
-                fontSize: 12,
-              }}
+              width={40}
             />
             <Tooltip
               contentStyle={{
