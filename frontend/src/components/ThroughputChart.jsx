@@ -1,12 +1,16 @@
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
 } from "recharts";
+
+function formatMbpsAxis(v) {
+  return v >= 1000 ? `${(v / 1000).toFixed(0)}G` : `${v}M`;
+}
 
 export default function ThroughputChart({ samples }) {
   const data = samples.map((s) => ({
@@ -17,46 +21,80 @@ export default function ThroughputChart({ samples }) {
 
   return (
     <div className="rounded-xl border border-graticule bg-panel p-5">
-      <p className="mb-2.5 text-sm text-muted">Last 2 minutes</p>
-      <div className="h-64">
+      <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
+        <div>
+          <p className="text-sm font-medium text-ink_text">Live Throughput</p>
+          <p className="text-xs text-muted">60-second rolling window &middot; 1s intervals</p>
+        </div>
+        <div className="flex items-center gap-4 text-xs text-muted">
+          <span className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-down" /> Download
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-up" /> Upload
+          </span>
+        </div>
+      </div>
+
+      <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
-            <CartesianGrid stroke="#223049" strokeDasharray="0" vertical={false} />
-            <XAxis dataKey="time" hide />
+          <AreaChart data={data} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
+            <defs>
+              <linearGradient id="downFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#22e5a0" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="#22e5a0" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="upFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#f97316" stopOpacity={0.18} />
+                <stop offset="100%" stopColor="#f97316" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid stroke="#1c212b" strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="time"
+              tick={{ fill: "#7d8798", fontSize: 11 }}
+              tickLine={false}
+              axisLine={{ stroke: "#1c212b" }}
+              minTickGap={60}
+            />
             <YAxis
-              stroke="#7f8ba1"
-              tick={{ fill: "#7f8ba1", fontSize: 12 }}
-              tickFormatter={(v) => v.toFixed(1)}
+              tick={{ fill: "#7d8798", fontSize: 11 }}
+              tickLine={false}
+              axisLine={false}
               width={40}
+              tickFormatter={formatMbpsAxis}
             />
             <Tooltip
               contentStyle={{
-                background: "#1a212c",
-                border: "1px solid #26313f",
+                background: "#10141b",
+                border: "1px solid #1c212b",
                 borderRadius: 8,
                 fontSize: 13,
               }}
-              formatter={(value, name) => [`${value.toFixed(2)} Mbps`, name]}
+              labelStyle={{ color: "#7d8798" }}
+              formatter={(value, name) => [`${value.toFixed(1)} Mbps`, name]}
             />
-            <Line
+            <Area
               type="monotone"
               dataKey="down"
               name="Download"
-              stroke="#4fd1c5"
+              stroke="#22e5a0"
               strokeWidth={2}
+              fill="url(#downFill)"
               dot={false}
               isAnimationActive={false}
             />
-            <Line
+            <Area
               type="monotone"
               dataKey="up"
               name="Upload"
-              stroke="#c586e0"
+              stroke="#f97316"
               strokeWidth={2}
+              fill="url(#upFill)"
               dot={false}
               isAnimationActive={false}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>
