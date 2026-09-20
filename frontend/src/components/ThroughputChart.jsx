@@ -29,7 +29,7 @@ export default function ThroughputChart({ samples }) {
           <p className="text-sm font-medium bg-[#10141b]" style={{ color: "#e7ebf1" }}>
             Live Throughput
           </p>
-          <p className="text-xs bg-transparent" style={{ color: "#7d8798" }}>
+          <p className="text-xs bg-[#10141b] py-1" style={{ color: "#7d8798" }}>
             60-second rolling window &middot; 1s intervals
           </p>
         </div>
