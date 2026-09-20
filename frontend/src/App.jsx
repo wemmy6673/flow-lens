@@ -47,7 +47,7 @@ export default function App() {
               {health.snmp_host}
             </span>
           )}
-          <span>{clock.toLocaleTimeString()}</span>
+          <span className="text-gray-500">{clock.toLocaleTimeString()}</span>
           <StatusBadge connected={connected} />
         </div>
       </header>

@@ -20,24 +20,31 @@ export default function ThroughputChart({ samples }) {
   }));
 
   return (
-    <div className="rounded-xl border border-graticule bg-panel p-5">
-      <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <p className="text-sm font-medium text-ink_text">Live Throughput</p>
-          <p className="text-xs text-muted">60-second rolling window &middot; 1s intervals</p>
+    <div
+      className="rounded-[30px] border p-5"
+      style={{ borderColor: "#1c212b", backgroundColor: "#10141b" }}
+    >
+      <div className="mb-4 flex flex-wrap  bg-transparent items-start justify-between gap-2">
+        <div className="">
+          <p className="text-sm font-medium bg-[#10141b]" style={{ color: "#e7ebf1" }}>
+            Live Throughput
+          </p>
+          <p className="text-xs bg-transparent" style={{ color: "#7d8798" }}>
+            60-second rolling window &middot; 1s intervals
+          </p>
         </div>
-        <div className="flex items-center gap-4 text-xs text-muted">
+        <div className="flex items-center gap-4 text-xs" style={{ color: "#7d8798" }}>
           <span className="flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-full bg-down" /> Download
+            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: "#22e5a0" }} /> Download
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-full bg-up" /> Upload
+            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: "#f97316" }} /> Upload
           </span>
         </div>
       </div>
 
       <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" className="bg-[10141b]">
           <AreaChart data={data} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
             <defs>
               <linearGradient id="downFill" x1="0" y1="0" x2="0" y2="1">

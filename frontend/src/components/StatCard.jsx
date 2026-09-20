@@ -1,20 +1,37 @@
-const COLOR_CLASSES = {
-  down: "text-green-600",
-  up: "text-orange-600",
-  neutral: "text-violet-600",
+const VALUE_COLORS = {
+  down: "#22e5a0",
+  up: "#f97316",
+  neutral: "#e7ebf1",
 };
 
 export default function StatCard({ eyebrow, value, unit, color = "neutral", subline }) {
   return (
-    <div className="rounded-[20px] border border-gray-800 bg-gray-900 px-5 py-8">
-      <p className="mb-1.5 text-[11px] font-medium uppercase bg-gray-900 tracking-wider text-muted">
+    <div
+      className="rounded-[30px] border px-5 py-10"
+      style={{ borderColor: "#1c212b", backgroundColor: "#10141b",  borderTopColor: VALUE_COLORS[color] }}
+    >
+      <p
+        className="mb-1.5 text-[11px] font-medium uppercase tracking-wider"
+        style={{ color: "#7d8798", backgroundColor: "#10141b" }}
+      >
         {eyebrow}
       </p>
-      <p className={`font-bold text-3xl bg-gray-900 leading-none ${COLOR_CLASSES[color]}`}>
+      <p
+        className="text-4xl leading-none"
+        style={{ color: VALUE_COLORS[color], backgroundColor: "#10141b" }}
+      >
         {value}
-        {unit && <span className="ml-1.5 font-sans text-sm text-muted">{unit}</span>}
+        {unit && (
+          <span className="ml-1.5 font-sans text-sm" style={{ color: "#7d8798" }}>
+            {unit}
+          </span>
+        )}
       </p>
-      {subline && <p className="mt-1.5 text-xs text-muted">{subline}</p>}
+      {subline && (
+        <p className="mt-1.5 text-xs" style={{ color: "#7d8798" }}>
+          {subline}
+        </p>
+      )}
     </div>
   );
 }
