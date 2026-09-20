@@ -7,7 +7,7 @@ export default function StatusBadge({ connected }) {
           : "border-bad/30 bg-bad/10 text-bad"
       }`}
     >
-      <span className={`h-1.5 w-1.5 rounded-full ${connected ? "bg-down" : "bg-bad"}`} />
+      <span className={`h-1.5 w-1.5 rounded-full ${connected ? "bg-green-700" : "bg-red-700"}`} />
       {connected ? "CONNECTED" : "DISCONNECTED"}
     </span>
   );

@@ -29,15 +29,15 @@ export default function App() {
   const upGB = usage ? usage.tx_bytes / 1_000_000_000 : null;
 
   return (
-    <div className="mx-auto flex min-h-screen bg-gray-900 text-white md:mx-20 flex-col gap-6 px-4 py-6 sm:px-8">
-      <header className="flex flex-wrap items-center justify-between gap-3">
+    <div className="mx-auto flex min-h-screen bg-ink text-white md:w-full flex-col gap-6 px-4 md:px-0 pb-6 sm:px-8">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-800 md:px-20 py-6">
         <div className="flex items-center gap-3">
           {/* Swap this square for an <img src={logo} /> once you have the logo file */}
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-down text-sm font-bold text-ink">
-            RT
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-down bg-green-400 text-lg font-bold text-ink">
+            FL
           </div>
           <div>
-            <p className="text-sm font-semibold leading-tight text-ink_text">RouterTrace</p>
+            <p className="text-lg font-semibold leading-tight text-ink_text">Flowlens</p>
           </div>
         </div>
         <div className="flex items-center gap-4 text-xs text-muted">
@@ -52,7 +52,7 @@ export default function App() {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="md:px-44 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard
           eyebrow="Download"
           value={downMbps.toFixed(1)}
@@ -74,9 +74,12 @@ export default function App() {
         />
       </div>
 
-      <ThroughputChart samples={samples} />
+      <div className="md:px-44 flex flex-col gap-8">
+
+      <ThroughputChart samples={samples}/>
 
       <BandwidthUtilization downMbps={downMbps} upMbps={upMbps} />
+      </div>
     </div>
   );
 }
